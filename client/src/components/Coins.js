@@ -27,7 +27,7 @@ const Coins = () => {
 
 
     async function fetchCoinsData() {
-        const res = await fetch("https://fast-eyrie-10826.herokuapp.com/api/Coinranking");
+        const res = await fetch("https://crypto-app-heroku.herokuapp.com/api/Coinranking");
         const resJSON = await res.json();
         const data = await resJSON.data;
         return data;
