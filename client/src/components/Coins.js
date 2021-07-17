@@ -22,8 +22,10 @@ function sortRankAscending(a, b) {
     return b.rank - a.rank;
 }
 
+
 const Coins = () => {
     let [coinElements, setCoinElements] = useState([<></>]);
+    //let [sortMethod, setSortMethod] = useState([sortRankDescending]);
 
 
     async function fetchCoinsData() {
@@ -56,7 +58,8 @@ const Coins = () => {
     // Component On Mount
     useEffect(() => {
         displayCoins();
-    }, );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div>
