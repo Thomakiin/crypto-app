@@ -56,7 +56,7 @@ const Coins = () => {
     // Component On Mount
     useEffect(() => {
         displayCoins();
-    }, []);
+    }, );
 
     return (
         <div>
