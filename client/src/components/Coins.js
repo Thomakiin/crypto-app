@@ -40,7 +40,7 @@ const Coins = () => {
         data.coins.sort(sortFunction);
 
         // Iterate through the coins and return a list of table rows
-        let tableRows = data.coins.map(coin => {
+        let coinTableRows = data.coins.map(coin => {
             return (
                 <tr>
                     <td>
@@ -51,28 +51,30 @@ const Coins = () => {
                         </div>
                     </td>
                     <td>
-                        <p>{"$" + coin.price + " USD"}</p>
+                        <p>{"$" + coin.price}</p>
                     </td>
                     <td>
-                        <p>{coin.change + "%" }</p>
+                        <p className={Math.sign(coin.change) >= 0 ? "change-positive" : "change-negative"}>
+                            {coin.change + "%"}
+                        </p>
                     </td>
                 </tr>
             )
         })
 
         // Assemble a finalized table to display the coins 
-        let table = (
+        let coinsTable = (
             <table>
                 <tr>
                     <th>Coin</th>
                     <th>Price (USD)</th>
                     <th>Change %</th>
                 </tr>
-                {tableRows}
+                {coinTableRows}
             </table>
         );
 
-        setCoinElements(table);
+        setCoinElements(coinsTable);
     }
 
     // Component On Mount
