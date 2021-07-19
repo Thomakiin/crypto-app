@@ -24,7 +24,7 @@ function sortRankAscending(a, b) {
 
 
 const Coins = () => {
-    let [coinElements, setCoinElements] = useState([<></>]);
+    let [coinElements, setCoinElements] = useState([<div> Loading . . . </div>]);
     //let [sortMethod, setSortMethod] = useState([sortRankDescending]);
 
 
@@ -35,45 +35,89 @@ const Coins = () => {
         return data;
     }
 
-    async function displayCoins(sortFunction) {
+    async function redisplayCoins(sortFunction) {
         const data = await fetchCoinsData();
         data.coins.sort(sortFunction);
-        let output = [];
 
-        output = data.coins.map(coin => {
+        // Iterate through the coins and return a list of table rows
+        let tableRows = data.coins.map(coin => {
             return (
-                <div className="coin">
-                    <img src={coin.iconUrl} alt={coin.name + " logo"} width="64px" />
-                    <h1>{coin.name}</h1>
-                    <p>{"Current price: $" + coin.price + " USD"}</p>
-                    <p>{"%" + coin.change}</p>
-                    <button>Buy</button>
-                    <button>Sell</button>
-                </div>
+                <tr>
+                    <td>
+                        <div className="profile-container">
+                            <img className="icon" src={coin.iconUrl} alt={coin.name + " logo"} width="54px" />
+                            <p className="name">{coin.name}</p>
+                            <p className="symbol">{coin.symbol}</p>
+                        </div>
+                    </td>
+                    <td>
+                        <p>{"$" + coin.price + " USD"}</p>
+                    </td>
+                    <td>
+                        <p>{coin.change + "%" }</p>
+                    </td>
+                </tr>
             )
         })
-        setCoinElements(output);
+
+        // Assemble a finalized table to display the coins 
+        let table = (
+            <table>
+                <tr>
+                    <th>Coin</th>
+                    <th>Price (USD)</th>
+                    <th>Change %</th>
+                </tr>
+                {tableRows}
+            </table>
+        );
+
+        setCoinElements(table);
     }
 
     // Component On Mount
     useEffect(() => {
-        displayCoins();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        redisplayCoins();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <div>
+
+            <table>
+                <caption>Alien football stars</caption>
+                <tr>
+                    <th scope="col">Player</th>
+                    <th scope="col">Gloobles</th>
+                    <th scope="col">Za'taak</th>
+                </tr>
+                <tr>
+                    <th scope="row">TR-7</th>
+                    <td>7</td>
+                    <td>4,569</td>
+                </tr>
+                <tr>
+                    <th scope="row">Khiresh Odo</th>
+                    <td>7</td>
+                    <td>7,223</td>
+                </tr>
+                <tr>
+                    <th scope="row">Mia Oolong</th>
+                    <td>9</td>
+                    <td>6,21900000000000</td>
+                </tr>
+            </table>
+
+            <h1>Top 50 coins</h1>
             <h2>Sort by:</h2>
-            <button onClick={() => displayCoins(sortRankDescending)}> Rank Descending </button>
-            <button onClick={() => displayCoins(sortRankAscending)}> Rank Ascending </button>
+            <button onClick={() => redisplayCoins(sortRankDescending)}> Rank Descending </button>
+            <button onClick={() => redisplayCoins(sortRankAscending)}> Rank Ascending </button>
 
-            <button onClick={() => displayCoins(sortChangeDescending)}> Change Descending </button>
-            <button onClick={() => displayCoins(sortChangeAscending)}> Change Ascending </button>
+            <button onClick={() => redisplayCoins(sortChangeDescending)}> Change Descending </button>
+            <button onClick={() => redisplayCoins(sortChangeAscending)}> Change Ascending </button>
 
-            <button onClick={() => displayCoins(sortPriceDescending)}> Price Descending </button>
-            <button onClick={() => displayCoins(sortPriceAscending)}> Price Ascending </button>
-            
-            <br /> <br /> <button>Display Mode: compact, medium, large, etc</button>
+            <button onClick={() => redisplayCoins(sortPriceDescending)}> Price Descending </button>
+            <button onClick={() => redisplayCoins(sortPriceAscending)}> Price Ascending </button>
 
             <div className="coins-container">
                 {coinElements}
