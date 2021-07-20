@@ -1,30 +1,23 @@
 import { useEffect, useState } from "react";
 
-function sortChangeDescending(a, b) {
-    return b.change - a.change;
-}
-function sortChangeAscending(a, b) {
-    return a.change - b.change;
-}
-
-function sortPriceDescending(a, b) {
-    return b.price - a.price;
-}
-function sortPriceAscending(a, b) {
-    return a.price - b.price;
-}
-
-// Reminder: With "rank" lower is better. Ex: 1st place vs 2nd place
-function sortRankDescending(a, b) {
-    return a.rank - b.rank;
-}
-function sortRankAscending(a, b) {
-    return b.rank - a.rank;
+function newSort(inItems, fieldname, direction) {
+    let items = [...inItems]; // make a copy of original items so we don't overwrite them with the "sort" method
+    items.sort((a, b) => {
+        if (direction === 'descending') {
+            return b[fieldname] - a[fieldname];
+        }
+        if (direction === 'ascending') {
+            return a[fieldname] - b[fieldname];
+        }
+        return 0;
+    })
+    return items;
 }
 
 
 const Coins = () => {
-    let [coinElements, setCoinElements] = useState([<div> Loading . . . </div>]);
+    let [coinsData, setCoinsData] = useState([]);
+
     //let [sortMethod, setSortMethod] = useState([sortRankDescending]);
 
 
@@ -35,71 +28,68 @@ const Coins = () => {
         return data;
     }
 
-    async function redisplayCoins(sortFunction) {
+    async function updateCoinsData(sortFunction) {
         const data = await fetchCoinsData();
-        data.coins.sort(sortFunction);
-
-        // Iterate through the coins and return a list of table rows
-        let coinTableRows = data.coins.map(coin => {
-            return (
-                <tr>
-                    <td>
-                        <div className="profile-container">
-                            <img className="icon" src={coin.iconUrl} alt={coin.name + " logo"} width="54px" />
-                            <p className="name">{coin.name}</p>
-                            <p className="symbol">{coin.symbol}</p>
-                        </div>
-                    </td>
-                    <td>
-                        <p>{"$" + coin.price}</p>
-                    </td>
-                    <td>
-                        <p className={Math.sign(coin.change) >= 0 ? "change-positive" : "change-negative"}>
-                            {coin.change + "%"}
-                        </p>
-                    </td>
-                </tr>
-            )
-        })
-
-        // Assemble a finalized table to display the coins 
-        let coinsTable = (
-            <table>
-                <tr>
-                    <th>Coin</th>
-                    <th>Price (USD)</th>
-                    <th>Change %</th>
-                </tr>
-                {coinTableRows}
-            </table>
-        );
-
-        setCoinElements(coinsTable);
+        let newCoinsData = await data.coins;
+        newCoinsData = newSort(newCoinsData, 'change', 'descending');
+        setCoinsData(newCoinsData);
     }
 
     // Component On Mount
     useEffect(() => {
-        redisplayCoins();
+
+        updateCoinsData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <div>
             <h1>Top 50 coins</h1>
+            {/*             
             <h2>Sort by:</h2>
-            <button onClick={() => redisplayCoins(sortRankDescending)}> Rank Descending </button>
-            <button onClick={() => redisplayCoins(sortRankAscending)}> Rank Ascending </button>
+            <button onClick={() => updateCoinsData(sortRankDescending)}> Rank Descending </button>
+            <button onClick={() => updateCoinsData(sortRankAscending)}> Rank Ascending </button>
 
-            <button onClick={() => redisplayCoins(sortChangeDescending)}> Change Descending </button>
-            <button onClick={() => redisplayCoins(sortChangeAscending)}> Change Ascending </button>
+            <button onClick={() => updateCoinsData(sortChangeDescending)}> Change Descending </button>
+            <button onClick={() => updateCoinsData(sortChangeAscending)}> Change Ascending </button>
 
-            <button onClick={() => redisplayCoins(sortPriceDescending)}> Price Descending </button>
-            <button onClick={() => redisplayCoins(sortPriceAscending)}> Price Ascending </button>
+            <button onClick={() => updateCoinsData(sortPriceDescending)}> Price Descending </button>
+            <button onClick={() => updateCoinsData(sortPriceAscending)}> Price Ascending </button> 
+            */}
 
             <div className="coins-container">
-                {coinElements}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Coin</th>
+                            <th>Price (USD)</th>
+                            <th>Change %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {coinsData.map((coin) => (
+                            <tr>
+                                <td>
+                                    <div className="profile-container">
+                                        <img className="icon" src={coin.iconUrl} alt={coin.name + " logo"} width="54px" />
+                                        <p className="name">{coin.name}</p>
+                                        <p className="symbol">{coin.symbol}</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p>{"$" + coin.price}</p>
+                                </td>
+                                <td>
+                                    <p className={Math.sign(coin.change) >= 0 ? "change-positive" : "change-negative"}>
+                                        {coin.change + "%"}
+                                    </p>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
-        </div>
+        </div >
     );
 }
 
