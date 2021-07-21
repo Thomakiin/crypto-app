@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
 import { mySort } from "../MyLibrary";
-//import SortToggle from "./SortToggle";
-
-/*
-let sortToggle = true;
-function toggleSort()
-*/
 
 let ascending = "ascending";
 let descending = "descending";
