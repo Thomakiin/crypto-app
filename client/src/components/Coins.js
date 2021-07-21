@@ -52,7 +52,6 @@ const Coins = () => {
 
     // Component On Mount
     useEffect(() => {
-
         updateCoinsData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -67,7 +66,7 @@ const Coins = () => {
                     console.log(e.target.children);
                     for (var i in e.target.children) {
                         let child = e.target.children[i];
-                        if (child.style) { // not all elements have styling, like raw text, numbers, and functions 
+                        if (child.style) { // check if child can be styled since not all elements have styling, like raw text, numbers, functions, etc 
                             console.log("i: " + i + " " + child);
                             child.style.visibility = "visible";
                         }
@@ -75,7 +74,7 @@ const Coins = () => {
                 }}>
 
                 Dropdown
-                <p>Coin</p>
+                <p>Cryptocurrency</p>
                 <p>Price (USD)</p>
                 <p>Change %</p>
             </div>
@@ -84,19 +83,21 @@ const Coins = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th onClick={(e) => { SortToggleFunc(e) }}>Coin</th>
+                            <th onClick={(e) => { SortToggleFunc(e) }}>Cryptocurrency</th>
                             <th onClick={(e) => { SortToggleFunc(e, "price") }}>Price (USD)</th>
-                            <th onClick={(e) => { SortToggleFunc(e, "change") }}>Change %</th>
+                            <th onClick={(e) => { SortToggleFunc(e, "change") }}>24H Change</th>
                         </tr>
                     </thead>
                     <tbody>
                         {coinsData.map((coin) => (
-                            <tr key={coin.id}>
+                            <tr className="coin" key={coin.id}>
                                 <td>
                                     <div className="profile-container">
                                         <img className="icon" src={coin.iconUrl} alt={coin.name + " logo"} width="54px" />
-                                        <p className="name">{coin.name}</p>
-                                        <p className="symbol">{coin.symbol}</p>
+                                        <div className="name-symbol-container">
+                                            <p className="name">{coin.name}</p>
+                                            <p className="symbol">{coin.symbol}</p>
+                                        </div>
                                     </div>
                                 </td>
                                 <td>
