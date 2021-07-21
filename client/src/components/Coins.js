@@ -1,25 +1,47 @@
 import { useEffect, useState } from "react";
+import { mySort } from "../MyLibrary";
+//import SortToggle from "./SortToggle";
 
-function newSort(inItems, fieldname, direction) {
-    let items = [...inItems]; // make a copy of original items so we don't overwrite them with the "sort" method
-    items.sort((a, b) => {
-        if (direction === 'descending') {
-            return b[fieldname] - a[fieldname];
-        }
-        if (direction === 'ascending') {
-            return a[fieldname] - b[fieldname];
-        }
-        return 0;
-    })
-    return items;
+/*
+let sortToggle = true;
+function toggleSort()
+*/
+
+let ascending = "ascending";
+let descending = "descending";
+let sortDirection = descending;
+
+function toggleSortDirection() {
+    if (sortDirection === ascending) {
+        sortDirection = descending;
+    }
+    else if (sortDirection === descending) {
+        sortDirection = ascending;
+    }
 }
-
 
 const Coins = () => {
     let [coinsData, setCoinsData] = useState([]);
 
-    //let [sortMethod, setSortMethod] = useState([sortRankDescending]);
 
+    function SortToggleFunc(e, fieldName) {
+        console.log("sort direction: " + sortDirection);
+
+        // Remove indicator from other elements. This is so we don't show multiple indicators at once
+        let tableHeads = document.getElementsByTagName("th");
+        for (var i in tableHeads) {
+            if (tableHeads[i].classList) {
+                tableHeads[i].classList.remove(descending);
+                tableHeads[i].classList.remove(ascending);
+            }
+        }
+
+        // Show direction indicator for selected element
+        e.target.classList.add(sortDirection); // add coresponding direction indicator class
+        setCoinsData(mySort(coinsData, fieldName, sortDirection)); // display sorted data
+
+        toggleSortDirection();
+    }
 
     async function fetchCoinsData() {
         const res = await fetch("https://crypto-app-heroku.herokuapp.com/api/Coinranking");
@@ -31,7 +53,6 @@ const Coins = () => {
     async function updateCoinsData(sortFunction) {
         const data = await fetchCoinsData();
         let newCoinsData = await data.coins;
-        newCoinsData = newSort(newCoinsData, 'change', 'descending');
         setCoinsData(newCoinsData);
     }
 
@@ -45,30 +66,38 @@ const Coins = () => {
     return (
         <div>
             <h1>Top 50 coins</h1>
-            {/*             
-            <h2>Sort by:</h2>
-            <button onClick={() => updateCoinsData(sortRankDescending)}> Rank Descending </button>
-            <button onClick={() => updateCoinsData(sortRankAscending)}> Rank Ascending </button>
 
-            <button onClick={() => updateCoinsData(sortChangeDescending)}> Change Descending </button>
-            <button onClick={() => updateCoinsData(sortChangeAscending)}> Change Ascending </button>
+            <div
+                className="drop-down"
+                onClick={(e) => {
+                    console.log(e.target.children);
+                    for (var i in e.target.children) {
+                        let child = e.target.children[i];
+                        if (child.style) { // not all elements have styling, like raw text, numbers, and functions 
+                            console.log("i: " + i + " " + child);
+                            child.style.visibility = "visible";
+                        }
+                    }
+                }}>
 
-            <button onClick={() => updateCoinsData(sortPriceDescending)}> Price Descending </button>
-            <button onClick={() => updateCoinsData(sortPriceAscending)}> Price Ascending </button> 
-            */}
+                Dropdown
+                <p>Coin</p>
+                <p>Price (USD)</p>
+                <p>Change %</p>
+            </div>
 
             <div className="coins-container">
                 <table>
                     <thead>
                         <tr>
-                            <th>Coin</th>
-                            <th>Price (USD)</th>
-                            <th>Change %</th>
+                            <th onClick={(e) => { SortToggleFunc(e) }}>Coin</th>
+                            <th onClick={(e) => { SortToggleFunc(e, "price") }}>Price (USD)</th>
+                            <th onClick={(e) => { SortToggleFunc(e, "change") }}>Change %</th>
                         </tr>
                     </thead>
                     <tbody>
                         {coinsData.map((coin) => (
-                            <tr>
+                            <tr key={coin.id}>
                                 <td>
                                     <div className="profile-container">
                                         <img className="icon" src={coin.iconUrl} alt={coin.name + " logo"} width="54px" />
