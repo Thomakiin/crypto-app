@@ -27,6 +27,7 @@ code {
   padding: 20px;
 }
 
+/*
 .coin {
   background-color: white;
   max-width: 1000px;
@@ -45,10 +46,19 @@ code {
 .coin .icon {
   margin-left: 0;
 }
+*/
 
 .coin .profile-container {
   margin-left: 0;
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.coin .name-symbol-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 4vw;
+  text-align: left;
 }
 
 .coin .symbol {
