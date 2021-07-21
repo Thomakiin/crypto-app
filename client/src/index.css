@@ -42,14 +42,14 @@ code {
 .coin * {
   margin: auto;
 }
-
-.coin .icon {
-  margin-left: 0;
-}
 */
 
+.coin .icon {
+  align-self: center; /* Fixes stretching since default self-align = stretch*/
+}
+
 .coin .profile-container {
-  margin-left: 0;
+  /*margin-left: 0;*/
   display: flex;
   flex-direction: row;
 }
@@ -57,7 +57,7 @@ code {
 .coin .name-symbol-container {
   display: flex;
   flex-direction: column;
-  margin-left: 4vw;
+  margin-left: 15px;
   text-align: left;
 }
 
