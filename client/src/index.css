@@ -61,33 +61,26 @@ code {
   margin-top: 2px;
   color: rgb(179, 179, 179);
 }
-/*
-
-
-table {
-  border-collapse: collapse;
-  letter-spacing: 1px;
-  font-family: sans-serif;
-  font-size: .8rem;
-}
-*/
 
 table {
   border-collapse:collapse;
-  border-radius: 25px;
+  border-radius: 15px;
   background-color: white;
 }
 
 td, th {
-  padding: 30px;
   border-bottom: 4px solid var(--main-bg-color);
+  padding: 30px;
+  text-align: left;
 }
 
 th{
 }
 
-td {
-  text-align: center;
+tr {
+  /*
+  padding-top: 0px;
+  padding-bottom: 0px;*/
 }
 
 /*
@@ -106,10 +99,6 @@ caption {
 
 .drop-down:active {
   visibility: visible;
-}
-
-.sort-indicator {
-  color: blue;
 }
 
 .descending::after {
