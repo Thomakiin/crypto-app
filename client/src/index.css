@@ -1,9 +1,13 @@
+
+
 html {
-  background-color: rgb(248, 248, 248);
+  --main-bg-color: rgb(248, 248, 248); /*rgb(248, 248, 248);*/
+
+  background-color: var(--main-bg-color);
+  /*background-color: rgb(254, 254, 254);*/
 }
 
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -24,7 +28,7 @@ code {
 .coins-container {
   margin: auto;
   max-width: 750px;
-  padding: 20px;
+ /* padding: 20px;*/
 }
 
 .coin .icon {
@@ -32,6 +36,7 @@ code {
 }
 
 .coin .profile-container {
+ /* margin: auto;*/
   display: flex;
   flex-direction: row;
 }
@@ -41,18 +46,44 @@ code {
   text-align: left;
 }
 
-.coin .symbol {
-  color: #777474;
-  margin-left: 0;
+.coin .name-symbol-container * {
+  margin: 0px;
+  text-align: left;
 }
 
-.coin button {
-  border: none;
+
+.coin .name {
+  display: table-caption; /* Fixes long horizontal text */
+}
+
+
+.coin .symbol {
+  margin-top: 2px;
+  color: rgb(179, 179, 179);
+}
+/*
+
+
+table {
+  border-collapse: collapse;
+  letter-spacing: 1px;
+  font-family: sans-serif;
+  font-size: .8rem;
+}
+*/
+
+table {
+  border-collapse:collapse;
+  border-radius: 25px;
+  background-color: white;
 }
 
 td, th {
-  border-bottom: 1px solid rgb(190, 190, 190);
-  padding: 10px;
+  padding: 30px;
+  border-bottom: 4px solid var(--main-bg-color);
+}
+
+th{
 }
 
 td {
@@ -67,14 +98,6 @@ tr:nth-child(even) {
 caption {
   padding: 10px;
   caption-side: bottom;
-}
-
-table {
-  border-collapse: collapse;
-  /*border: 2px solid rgb(200, 200, 200);*/
-  letter-spacing: 1px;
-  font-family: sans-serif;
-  font-size: .8rem;
 }
 
 .drop-down * {
