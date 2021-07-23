@@ -4,6 +4,7 @@ import { mySort } from "../MyLibrary";
 let ascending = "ascending";
 let descending = "descending";
 let sortDirection = descending;
+let sortField = "";
 
 function toggleSortDirection() {
     if (sortDirection === ascending) {
@@ -14,14 +15,17 @@ function toggleSortDirection() {
     }
 }
 
+
 const Coins = () => {
     let [coinsData, setCoinsData] = useState([]);
 
 
-    function SortToggleFunc(e, fieldName) {
+    function sortCoins(e, inFieldName) {
+        sortField = inFieldName;
+        toggleSortDirection();
         console.log("sort direction: " + sortDirection);
 
-        // Remove indicator from other elements. This is so we don't show multiple indicators at once
+        // Remove visual direction indicator from other elements. This is so we don't show multiple indicators at once
         let tableHeads = document.getElementsByTagName("th");
         for (var i in tableHeads) {
             if (tableHeads[i].classList) {
@@ -30,11 +34,10 @@ const Coins = () => {
             }
         }
 
-        // Show direction indicator for selected element
+        // Add visual direction indicator for selected element
         e.target.classList.add(sortDirection); // add coresponding direction indicator class
-        setCoinsData(mySort(coinsData, fieldName, sortDirection)); // display sorted data
+        setCoinsData(mySort(coinsData, inFieldName, sortDirection)); // display sorted data
 
-        toggleSortDirection();
     }
 
     async function fetchCoinsData() {
@@ -53,13 +56,15 @@ const Coins = () => {
     // Component On Mount
     useEffect(() => {
         updateCoinsData();
+        setInterval(updateCoinsData, 60000); // update coins data every minute
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    
 
     return (
         <div>
             <h1>Top 50 coins</h1>
-
             <div
                 className="drop-down"
                 onClick={(e) => {
@@ -72,46 +77,60 @@ const Coins = () => {
                         }
                     }
                 }}>
-
                 Dropdown
                 <p>Cryptocurrency</p>
                 <p>Price (USD)</p>
                 <p>Change %</p>
             </div>
 
+
+            <div className="sort-widget">
+                <p>Sorting by: {sortField} </p> <span className={sortDirection} />
+            </div>
+
             <div className="coins-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th onClick={(e) => { SortToggleFunc(e) }}>Cryptocurrency</th>
-                            <th onClick={(e) => { SortToggleFunc(e, "price") }}>Price (USD)</th>
-                            <th onClick={(e) => { SortToggleFunc(e, "change") }}>24H Change</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {coinsData.map((coin) => (
-                            <tr className="coin" key={coin.id}>
-                                <td>
-                                    <div className="profile-container">
-                                        <img className="icon" src={coin.iconUrl} alt={coin.name + " logo"} width="54px" />
-                                        <div className="name-symbol-container">
-                                            <p className="name">{coin.name}</p>
-                                            <p className="symbol">{coin.symbol}</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p>{"$" + coin.price}</p>
-                                </td>
-                                <td>
-                                    <p className={Math.sign(coin.change) >= 0 ? "change-positive" : "change-negative"}>
-                                        {coin.change + "%"}
-                                    </p>
-                                </td>
+
+                {coinsData.length <= 0 &&
+                    <div>
+                        <div className="loader" />
+                        <p>Loading coin data . . . Heroku may be sleeping . . .</p>
+                    </div>
+                }
+
+                {coinsData.length > 0 &&
+                    <table>
+                        <thead>
+                            <tr>
+                                <th onClick={(e) => { sortCoins(e) }}>Cryptocurrency</th>
+                                <th onClick={(e) => { sortCoins(e, "price") }}>Price (USD)</th>
+                                <th onClick={(e) => { sortCoins(e, "change") }}>24H Change</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {coinsData.map((coin) => (
+                                <tr className="coin" key={coin.id}>
+                                    <td>
+                                        <div className="profile-container">
+                                            <img className="icon" src={coin.iconUrl} alt={coin.name + " logo"} width="40px" />
+                                            <div className="name-symbol-container">
+                                                <p className="name">{coin.name}</p>
+                                                <p className="symbol">{coin.symbol}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p>{"$" + coin.price}</p>
+                                    </td>
+                                    <td>
+                                        <p className={Math.sign(coin.change) >= 0 ? "change-positive" : "change-negative"}>
+                                            {coin.change + "%"}
+                                        </p>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                }
             </div>
         </div >
     );
