@@ -132,9 +132,6 @@ caption {
   * {
     font-size:small;
   }
-  body {
-    background-color: rgb(255, 0, 0);
-  }
   table * {
     padding: 0px;
   }
