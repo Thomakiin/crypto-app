@@ -15,9 +15,7 @@ body {
   align-self: center;
   margin: auto;
   border: 16px solid #f3f3f3;
-  /* Light grey */
   border-top: 16px solid #3498db;
-  /* Blue */
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -63,20 +61,17 @@ td:last-child, th:last-child {
 
 td, th {
   border-bottom: 4px solid var(--main-bg-color);
-  padding: 3px;
   text-align: left;
-  padding: 2vw;
+  padding-inline: 2vw;
+  padding-block: 15px;
 }
 
 .coin .icon {
-  align-self: center;
-  /* Fixes stretching since default self-align = stretch*/
+  align-self: center; /* Fixes stretching since default self-align = stretch*/
 }
 
 .coin .profile-container {
-  /* margin: auto;*/
   display: flex;
-  /*flex-direction: row;*/
 }
 
 .coin .name-symbol-container {
@@ -133,7 +128,7 @@ caption {
     font-size:small;
   }
   table * {
-    padding: 0px;
+    padding-inline: 1px;
   }
   .icon {
     width: 32px;
