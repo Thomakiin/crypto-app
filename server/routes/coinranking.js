@@ -1,8 +1,14 @@
 var express = require('express');
 var router = express.Router();
 const fetch = require('node-fetch');
+var cors = require('cors');
 
-router.get('/', (req, res) => {
+var corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+router.get('/', cors(corsOptions), (req, res) => {
     fetch("https://coinranking1.p.rapidapi.com/coins", {
         "method": "GET",
         "headers": {
