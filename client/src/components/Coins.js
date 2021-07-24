@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { mySort } from "../MyLibrary";
+import { sortJSON } from "../MyLibrary";
 
 let ascending = "ascending";
 let descending = "descending";
@@ -20,8 +20,8 @@ const Coins = () => {
     let [coinsData, setCoinsData] = useState([]);
 
 
-    function sortCoins(e, inFieldName) {
-        sortField = inFieldName;
+    function sortCoins(e, fieldname, type) {
+        sortField = fieldname;
         toggleSortDirection();
         console.log("sort direction: " + sortDirection);
 
@@ -36,7 +36,7 @@ const Coins = () => {
 
         // Add visual direction indicator for selected element
         e.target.classList.add(sortDirection); // add coresponding direction indicator class
-        setCoinsData(mySort(coinsData, inFieldName, sortDirection)); // display sorted data
+        setCoinsData(sortJSON(coinsData, fieldname, sortDirection, type)); // display sorted data
 
     }
 
@@ -101,8 +101,9 @@ const Coins = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th onClick={(e) => { sortCoins(e) }}>Cryptocurrency</th>
-                                <th onClick={(e) => { sortCoins(e, "price") }}>Price (USD)</th>
+                                <th onClick={(e) => { sortCoins(e, "name")}}>Cryptocurrency</th>
+                                <th onClick={(e) => { sortCoins(e, "price", "number") }}>Price (USD)</th> 
+                                <th onClick={(e) => { sortCoins(e, "marketCap", "number") }}>Market Cap (USD)</th> 
                                 <th onClick={(e) => { sortCoins(e, "change") }}>24H Change</th>
                             </tr>
                         </thead>
@@ -120,6 +121,9 @@ const Coins = () => {
                                     </td>
                                     <td>
                                         <p>{"$" + coin.price}</p>
+                                    </td>
+                                    <td>
+                                        <p>{"$" + coin.marketCap}</p>
                                     </td>
                                     <td>
                                         <p className={Math.sign(coin.change) >= 0 ? "change-positive" : "change-negative"}>

@@ -49,25 +49,27 @@ body {
 table {
   margin: auto;
   border-collapse: collapse;
-  border-radius: 15px;
+  border-radius: 30px;
   background-color: white;
 }
-
-/*
-td:last-child, th:last-child {
-  justify-content: flex-end;
-  display: flex;
-}*/
 
 td, th {
   border-bottom: 4px solid var(--main-bg-color);
   text-align: left;
-  padding-inline: 2vw;
+  padding-inline: 2vw; /*Responsively scale horizontal padding*/
+}
+
+th {
+  padding-block: 30px;
+}
+
+td {
   padding-block: 15px;
 }
 
 .coin .icon {
-  align-self: center; /* Fixes stretching since default self-align = stretch*/
+  align-self: center;
+  /* Fixes stretching since default self-align = stretch*/
 }
 
 .coin .profile-container {
@@ -92,11 +94,6 @@ td, th {
 .coin .symbol {
   margin-top: 2px;
   color: rgb(179, 179, 179);
-}
-
-caption {
-  padding: 10px;
-  caption-side: bottom;
 }
 
 .drop-down * {
@@ -125,7 +122,7 @@ caption {
 
 @media only screen and (max-width: 425px) {
   * {
-    font-size:small;
+    font-size: small;
   }
   table * {
     padding-inline: 1px;
@@ -133,8 +130,11 @@ caption {
   .icon {
     width: 32px;
   }
-  /*
-  .profile-container {
-    flex-direction: column;
-  }*/
+
+  /* Removes a column*/
+  /* 
+  tr th:nth-child(2), tr td:nth-child(2) {
+    display: none;
+  }
+  */
 }
