@@ -73,9 +73,6 @@ const Coins = () => {
 
     return (
         <div>
-            <h2 style={{ "text-align": "center" }}>
-                Crypto data is updated every (minute)
-            </h2>
             <div className="coins-container">
                 {coinsData.length <= 0 && /* Loading, waiting for data to be populated */
                     <div>
