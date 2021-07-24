@@ -105,11 +105,15 @@ td {
 }
 
 .descending::after {
-  content: " ▼";
+  position: absolute;
+  margin-left: 5px;
+  content: "▼";
 }
 
 .ascending::after {
-  content: " ▲";
+  position: absolute;
+  margin-left: 5px;
+  content: "▲";
 }
 
 .change-positive {
@@ -132,9 +136,9 @@ td {
   }
 
   /* Removes a column*/
-  /* 
-  tr th:nth-child(2), tr td:nth-child(2) {
+  /*
+  tr th:nth-child(3), tr td:nth-child(3) {
     display: none;
-  }
-  */
+  }*/
+  
 }

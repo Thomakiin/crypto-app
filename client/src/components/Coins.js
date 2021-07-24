@@ -4,7 +4,7 @@ import { sortJSON, numFormatter } from "../MyLibrary";
 let ascending = "ascending";
 let descending = "descending";
 let sortDirection = descending;
-let sortField = "";
+let sortField = "marketCap";
 
 function toggleSortDirection() {
     if (sortDirection === ascending) {
@@ -20,7 +20,8 @@ const Coins = () => {
     let [coinsData, setCoinsData] = useState([]);
 
 
-    function sortCoins(e, fieldname, type) {
+    function sortCoins(el, fieldname, type) {
+        console.log("sort coins el = " + el);
         sortField = fieldname;
         toggleSortDirection();
         console.log("sort direction: " + sortDirection);
@@ -35,7 +36,9 @@ const Coins = () => {
         }
 
         // Add visual direction indicator for selected element
-        e.target.classList.add(sortDirection); // add coresponding direction indicator class
+        if (el) {
+            el.classList.add(sortDirection); // add coresponding direction indicator class
+        }
         setCoinsData(sortJSON(coinsData, fieldname, sortDirection, type)); // display sorted data
 
     }
@@ -50,17 +53,27 @@ const Coins = () => {
     async function updateCoinsData(sortFunction) {
         const data = await fetchCoinsData();
         let newCoinsData = await data.coins;
-        setCoinsData(newCoinsData);
+        newCoinsData = sortJSON(newCoinsData, sortField, sortDirection);
+        await setCoinsData(newCoinsData);
+        //let el = await document.getElementById(sortField);
+        //sortCoins(el, sortField);
+        //setTimeout(()=>{sortCoins(el, sortField)}, 100);
     }
 
     // Component On Mount
     useEffect(() => {
+        /*
+        async function test() {
+            await updateCoinsData();
+            coinsData = sortJSON(coinsData, "price", sortDirection);
+        }
+        test();*/
         updateCoinsData();
         setInterval(updateCoinsData, 60000); // update coins data every minute
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    
+
 
     return (
         <div>
@@ -101,10 +114,10 @@ const Coins = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th onClick={(e) => { sortCoins(e, "name")}}>Cryptocurrency</th>
-                                <th onClick={(e) => { sortCoins(e, "price", "number") }}>Price (USD)</th> 
-                                <th onClick={(e) => { sortCoins(e, "marketCap", "number") }}>Market Cap (USD)</th> 
-                                <th onClick={(e) => { sortCoins(e, "change") }}>24H Change</th>
+                                <th id="name" onClick={(e) => { sortCoins(e.target, "name") }}>Cryptocurrency</th>
+                                <th id="price" onClick={(e) => { sortCoins(e.target, "price", "number") }}>Price (USD)</th>
+                                <th id="marketCap" onClick={(e) => { sortCoins(e.target, "marketCap", "number") }}>Market Cap</th>
+                                <th id="change" onClick={(e) => { sortCoins(e.target, "change") }}>24H Change</th>
                             </tr>
                         </thead>
                         <tbody>
