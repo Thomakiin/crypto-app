@@ -1,6 +1,11 @@
-<h1>Overview:</h1>
+<h1>Crypto App </h1>
 <p>
-  An app where you can see the latest data for the top 50 crytocurrencies, deployed at: https://crypto-app-netlify.netlify.app/ 
+  A single page React app for users to view the latest data for the top 50 crytocurrencies
+</p>
+
+<h2>Demo:</h2>
+<p>
+  View the app <a href="https://crypto-app-netlify.netlify.app"> here </a> 
 </p>
 
 
