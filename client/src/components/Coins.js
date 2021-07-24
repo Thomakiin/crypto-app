@@ -76,7 +76,6 @@ const Coins = () => {
             <div className="coins-container">
                 {coinsData.length <= 0 && /* Loading, waiting for data to be populated */
                     <div>
-                        {/*<img className="loader" src="https://cdn.coinranking.com/bOabBYkcX/bitcoin_btc.svg" alt="bitcoin icon" />*/}
                         <div className="loader">
                         </div>
                         <p style={{ "text-align": "center" }}>Fetching coin data from server . . . Heroku may be sleeping . . .</p>
