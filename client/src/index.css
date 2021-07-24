@@ -47,6 +47,8 @@ body {
 }
 
 table {
+  width: 100%;
+  max-width: 600px;
   margin: auto;
   border-collapse: collapse;
   border-radius: 30px;
@@ -56,7 +58,8 @@ table {
 td, th {
   border-bottom: 4px solid var(--main-bg-color);
   text-align: left;
-  padding-inline: 2vw; /*Responsively scale horizontal padding*/
+  padding-inline: 2vw;
+  /*Responsively scale horizontal padding*/
 }
 
 th {
@@ -124,7 +127,14 @@ td {
   color: red
 }
 
-@media only screen and (max-width: 425px) {
+@media screen and (max-width: 600px) {
+  /* Removes the third column (Market Cap) */
+  tr th:nth-child(3), tr td:nth-child(3) {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 425px) {
   * {
     font-size: small;
   }
@@ -134,11 +144,4 @@ td {
   .icon {
     width: 32px;
   }
-
-  /* Removes a column*/
-  /*
-  tr th:nth-child(3), tr td:nth-child(3) {
-    display: none;
-  }*/
-  
 }
