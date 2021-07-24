@@ -1,28 +1,28 @@
 
-export function numFormatter(num) {
+// Display number in appropriate unit, ex: 50,000 becomes 50K
+export function formatNum(num) {
     if (num > 999 && num < 1000000) {
-        return (num / 1000).toFixed(1) + 'K'; // convert to K for number from > 1000 < 1 million 
+        return (num / 1000).toFixed(1) + 'K'; // convert to K for numbers between 1000 and 1 million 
     }
     else if (num > 1000000 && num < 1000000000) {
-        return (num / 1000000).toFixed(1) + 'M'; // convert to M for number from > 1 million < 1 billion
+        return (num / 1000000).toFixed(1) + 'M'; // convert to M for numbers between 1 million and 1 billion
     }
     else if (num > 1000000000) {
-        return (num / 1000000000).toFixed(1) + 'B'; // convert to B for number > 1 billion
+        return (num / 1000000000).toFixed(1) + 'B'; // convert to B for numbers above 1 billion
     }
-    else if (num < 900) {
-        return num; // if value < 1000, nothing to do
+    else if (num < 999) {
+        return num; // if the number is less than 1000 don't convert to anything
     }
 }
 
+// Sorts a list of JSON based on the inputted field name ex: price
 export function sortJSON(inItems, fieldname, direction, inType) {
     let items = [...inItems]; // make a copy of original items so we don't overwrite them with the "sort" method
     console.log("mySort. In type: " + inType + " fieldname: " + fieldname);
     items.sort((a, b) => {
 
-        a = a[fieldname];
+        a = a[fieldname]; //
         b = b[fieldname];
-
-        //console.log(" a,b  "  + a + " " + b + typeof a + ", " + typeof b);
 
         // sort numeric items
         if (inType === "number" || (inType === undefined && typeof a == "number" && typeof b == "number")) {

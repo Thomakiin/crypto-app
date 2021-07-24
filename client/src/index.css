@@ -1,8 +1,6 @@
 html {
   --main-bg-color: rgb(248, 248, 248);
-  /*rgb(248, 248, 248);*/
   background-color: var(--main-bg-color);
-  /*background-color: rgb(254, 254, 254);*/
 }
 
 body {
@@ -58,8 +56,8 @@ table {
 td, th {
   border-bottom: 4px solid var(--main-bg-color);
   text-align: left;
-  padding-inline: 2vw;
   /*Responsively scale horizontal padding*/
+  padding-inline: 10px;
 }
 
 th {
@@ -71,9 +69,11 @@ td {
 }
 
 .coin .icon {
-  align-self: center;
   /* Fixes stretching since default self-align = stretch*/
+  align-self: center;
 }
+
+/* Holds the icon, name and symbol */
 
 .coin .profile-container {
   display: flex;
@@ -90,8 +90,8 @@ td {
 }
 
 .coin .name {
+  /* Decreases horizontal width by breaking text down a line at each space*/
   display: table-caption;
-  /* Fixes long horizontal text */
 }
 
 .coin .symbol {
@@ -108,12 +108,14 @@ td {
 }
 
 .descending::after {
+  /*absolute position helps prevent resizing the table*/
   position: absolute;
   margin-left: 5px;
   content: "▼";
 }
 
 .ascending::after {
+  /*absolute position helps prevent resizing the table*/
   position: absolute;
   margin-left: 5px;
   content: "▲";

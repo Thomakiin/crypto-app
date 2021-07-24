@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import { sortJSON, numFormatter } from "../myUtils";
+import { sortJSON, formatNum } from "../myUtils";
 
+// sort directions
 let ascending = "ascending";
 let descending = "descending";
+
+// current sort configuration
 let currentSortDirection = descending;
 let currentSortField = "marketCap";
 
@@ -18,13 +21,12 @@ function toggleSortDirection() {
 const Coins = () => {
     let [coinsData, setCoinsData] = useState([]);
 
-
-    // Sorts the coins and displays the direcional indicator on the inputted element "el"
+    // Sorts the coins, also displays the direcional indicator on the inputted element "el"
     function sortCoins(el, fieldname, type) {
         currentSortField = fieldname;
         toggleSortDirection();
 
-        // Remove visual direction indicator from other elements. This is so we don't show multiple indicators at once
+        // Remove visual direction indicator from other table heads. This is so we don't show multiple indicators at once.
         let tableHeads = document.getElementsByTagName("th");
         for (var i in tableHeads) {
             if (tableHeads[i].classList) {
@@ -62,8 +64,8 @@ const Coins = () => {
 
     // Component On Mount
     useEffect(() => {
-        updateCoinsData();
-        setInterval(updateCoinsData, 60000); // update coins data every minute
+        updateCoinsData(); // initial fetch and display of crypto data
+        setInterval(updateCoinsData, 60000); // update crypto data every minute
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -71,50 +73,63 @@ const Coins = () => {
 
     return (
         <div>
+            <h2 style={{ "text-align": "center" }}>
+                Crypto data is updated every (minute)
+            </h2>
             <div className="coins-container">
-
-                {coinsData.length <= 0 &&
+                {coinsData.length <= 0 && /* Loading, waiting for data to be populated */
                     <div>
-                        <div className="loader" />
-                        <p>Loading coin data . . . Heroku may be sleeping . . .</p>
+                        {/*<img className="loader" src="https://cdn.coinranking.com/bOabBYkcX/bitcoin_btc.svg" alt="bitcoin icon" />*/}
+                        <div className="loader">
+                        </div>
+                        <p style={{ "text-align": "center" }}>Fetching coin data from server . . . Heroku may be sleeping . . .</p>
                     </div>
                 }
-
-                {coinsData.length > 0 &&
+                {coinsData.length > 0 && /* Display table of crypto currencies */
                     <table>
                         <thead>
                             <tr>
-                                <th id="name" onClick={(e) => { sortCoins(e.target, "name") }}>Cryptocurrency</th>
-                                <th id="price" onClick={(e) => { sortCoins(e.target, "price", "number") }}>Price (USD)</th>
-                                <th id="marketCap" onClick={(e) => { sortCoins(e.target, "marketCap", "number") }}>Market Cap</th>
-                                <th id="change" onClick={(e) => { sortCoins(e.target, "change") }}>24H Change</th>
+                                <th id="name" onClick={(e) => { sortCoins(e.target, "name") }}>
+                                    Cryptocurrency
+                                </th>
+                                <th id="price" onClick={(e) => { sortCoins(e.target, "price", "number") }}>
+                                    Price (USD)
+                                </th>
+                                <th id="marketCap" onClick={(e) => { sortCoins(e.target, "marketCap", "number") }}>
+                                    Market Cap
+                                </th>
+                                <th id="change" onClick={(e) => { sortCoins(e.target, "change") }}>
+                                    24H Change
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {coinsData.map((coin) => (
-                                <tr className="coin" key={coin.id}>
-                                    <td>
-                                        <div className="profile-container">
-                                            <img className="icon" src={coin.iconUrl} alt={coin.name + " logo"} width="40px" />
-                                            <div className="name-symbol-container">
-                                                <p className="name">{coin.name}</p>
-                                                <p className="symbol">{coin.symbol}</p>
+                            {
+                                coinsData.map((coin) => (
+                                    <tr className="coin" key={coin.id}>
+                                        <td>
+                                            <div className="profile-container">
+                                                <img className="icon" src={coin.iconUrl} alt={coin.name + " logo"} width="40px" />
+                                                <div className="name-symbol-container">
+                                                    <p className="name">{coin.name}</p>
+                                                    <p className="symbol">{coin.symbol}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p>{"$" + coin.price}</p>
-                                    </td>
-                                    <td>
-                                        <p>{"$" + numFormatter(coin.marketCap)}</p>
-                                    </td>
-                                    <td>
-                                        <p className={Math.sign(coin.change) >= 0 ? "change-positive" : "change-negative"}>
-                                            {coin.change + "%"}
-                                        </p>
-                                    </td>
-                                </tr>
-                            ))}
+                                        </td>
+                                        <td>
+                                            <p>{"$" + coin.price}</p>
+                                        </td>
+                                        <td>
+                                            <p>{"$" + formatNum(coin.marketCap)}</p>
+                                        </td>
+                                        <td>
+                                            <p className={Math.sign(coin.change) >= 0 ? "change-positive" : "change-negative"}>
+                                                {coin.change + "%"}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                ))
+                            }
                         </tbody>
                     </table>
                 }
