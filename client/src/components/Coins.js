@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { sortJSON } from "../MyLibrary";
+import { sortJSON, numFormatter } from "../MyLibrary";
 
 let ascending = "ascending";
 let descending = "descending";
@@ -123,7 +123,7 @@ const Coins = () => {
                                         <p>{"$" + coin.price}</p>
                                     </td>
                                     <td>
-                                        <p>{"$" + coin.marketCap}</p>
+                                        <p>{"$" + numFormatter(coin.marketCap)}</p>
                                     </td>
                                     <td>
                                         <p className={Math.sign(coin.change) >= 0 ? "change-positive" : "change-negative"}>
