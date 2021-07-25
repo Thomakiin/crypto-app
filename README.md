@@ -5,7 +5,7 @@
 
 <h2>Demo:</h2>
 <p>
-  View the app <a href="https://crypto-app-netlify.netlify.app"> here! </a> 
+  <a href="https://crypto-app-netlify.netlify.app"> View the app here! </a> 
 </p>
 
 
