@@ -27,6 +27,19 @@
 
 <h2>Technical Breakdown</h2>
 
+<p>
+  A list variable holds all of the coin's data in JSON, and employs the use state hook. This list is mapped and displayed in the render function, therefore to sort or update the displayed data, simply update this list.  
+</p>
+<p>
+  A function is used when updating the data to make sure it stays sorted using current sort configuration (EX: Sort by price descending)
+</p>
+<p>
+  The sort direction indicator is only displayed next to the appropriate table head (cryptocurrency, price, market cap) 
+</p>
+<p>
+  The change % is shown as red or green for each element depending on whether it was positive or negative change. 
+</p>
+
 <h4>Tech Stack</h4>
 <ul>
   <li>React</li>
@@ -34,37 +47,19 @@
   <li>npm</li>
 </ul>
 
+The 
+
 <h4> Security: </h4>
 <ul>
   <li>
-    All interactions involving the API key are handled through the server, acting as a proxy to the client to allow retrieval of data without exposing confidential information. Stolen API keys can be abused by an attacker to make the victim pay for their own data usage.
-  </li>
-</ul>
-
-<h4> Data handling: </h4>
-<ul>
-  <li>
-    (Fetch / Sort / Timer thing / Loading screen)
+    All interactions involving the API key are handled through the server, which acts a proxy to the client to allow retrieval of data without exposing confidential information. Stolen API keys can be abused by an attacker to make the victim pay for their own data usage.
   </li>
 </ul>
 
 
 <h4> Responsive Design: </h4>
-<ul>
-  <li>
-    Padding and icon size are adjusted, and columns are added or removed based on screen width.
-  </li>
-</ul>
+<p>Padding and icon size are adjusted, and columns are added or removed based on screen width. </p>
 
-
-<p>
-  Cryptocurrency data  utilizes the use state hook,   
-</p>
-<p>Sorting is done by. . . display ascending / descending . . . </p>
-<p>Responsive (column break) . . .</p>
-<p>Backend proxy server for safe API key . . .</p>
-<p>Show %change as red or green . . .</p>
-<p>Update data. . .</p>
 
 
 
