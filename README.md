@@ -19,6 +19,10 @@
     <h3> The Latest Data </h3> 
     The data is updated every minute using the latest data from <a href="https://rapidapi.com/Coinranking/api/coinranking1/"> Coinranking's API</a>
   </li>
+  <li>
+    <h3> Responsive Design </h3> 
+    UI that works well no matter how small or large the device is
+  </li>
 </ul>
 
 <h2>Technical Breakdown</h2>
