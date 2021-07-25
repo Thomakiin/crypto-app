@@ -12,8 +12,8 @@
 <h2>Features</h2>
 <ul>
   <li>
-    <h3> thing1 </h3> 
-    description lorem bla bla
+    <h3> Intuitive Sorting </h3> 
+    To sort, simply select one of the categories! An indicator will be displayed to show the sort direction (either ascending or descending)
   </li>
   <li>
     <h3> thing2 </h3> 
@@ -21,7 +21,13 @@
   </li>
 </ul>
 
-<h2>Technical Details</h2>
+<h2>Technical Breakdown</h2>
+
+<p>Sorting, display ascending / descending . . . </p>
+<p>Responsive (column break) . . .</p>
+<p>Backend proxy server for safe API key . . .</p>
+
+
 <h3>Tech Stack</h3>
 <ul>
   <li>React</li>
