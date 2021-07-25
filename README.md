@@ -12,45 +12,47 @@
 <h2>Features</h2>
 <ul>
   <li>
-    <h3> Intuitive Sorting </h3> 
+    <h4> Intuitive Sorting </h4> 
     To sort, simply select one of the categories! An indicator will be displayed to show the sort direction (either ascending or descending), click the item again to toggle the direction.
   </li>
   <li>
-    <h3> The Latest Data </h3> 
+    <h4> The Latest Data </h4> 
     The data is updated every minute using the latest data from <a href="https://rapidapi.com/Coinranking/api/coinranking1/"> Coinranking's API</a>
   </li>
   <li>
-    <h3> Scalable Design </h3> 
+    <h4> Scalable Design </h4> 
     UI designed for any device
   </li>
 </ul>
 
+<h2>Technical Breakdown</h2>
 
-<h2>Tech Stack</h2>
+<h4>Tech Stack</h4>
 <ul>
   <li>React</li>
   <li>Node / Express</li>
   <li>npm</li>
 </ul>
 
-<h2>Technical Breakdown</h2>
-
 <h4> Security: </h4>
 <ul>
   <li>
-    <p>
-      All interactions involving a secret are handled through the server (in this case an API key) Stolen API keys can be abused by an attacker to make the victim pay for their own data usage.
-    </p>
+    All interactions involving the API key are handled through the server, acting as a proxy to the client to allow retrieval of data without exposing confidential information. Stolen API keys can be abused by an attacker to make the victim pay for their own data usage.
   </li>
 </ul>
+
+<h4> Data handling: </h4>
+<ul>
+  <li>
+    (Fetch / Sort / Timer thing / Loading screen)
+  </li>
+</ul>
+
 
 <h4> Responsive Design: </h4>
 <ul>
   <li>
-    Padding and icon size are adjusted 
-  </li>
-  <li>
-    Additional columns are added or removed 
+    Padding and icon size are adjusted, and columns are added or removed based on screen width.
   </li>
 </ul>
 
