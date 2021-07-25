@@ -25,19 +25,22 @@
   </li>
 </ul>
 
-<h2>Technical Breakdown</h2>
+<h2>Technical Overview</h2>
 
 <p>
   A list variable holds all of the coin's data in JSON, and employs the use state hook. This list is mapped and displayed in the render function, therefore to sort or update the displayed data, simply update this list.  
 </p>
 <p>
+  The directional indicator is displayed on the desired element by adding a class called "ascending" or "descending". These classes use the :after selector to display a unicode arrow. The table heads (cryptocurrency, price, market cap) implement an on click function that sorts the data by the inputted field and adds the corresponding direction class to themself.
+</p>
+<p>
   A function is used when updating the data to make sure it stays sorted using current sort configuration (EX: Sort by price descending)
 </p>
 <p>
-  The sort direction indicator is only displayed next to the appropriate table head (cryptocurrency, price, market cap) 
+  The change % is shown as red or green for each element depending on whether it was positive or negative change. 
 </p>
 <p>
-  The change % is shown as red or green for each element depending on whether it was positive or negative change. 
+  A reusable utility function called sortJSON was created which can sort a list of JSON based on the inputted field name and direction. Greatly reducing the amount of code required as compared to defining a function for each combination of field and direction.   
 </p>
 
 <h4>Tech Stack</h4>
