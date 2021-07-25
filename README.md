@@ -1,11 +1,11 @@
 <h1>Crypto App </h1>
 <p>
-  A single page React app for users to view the latest data for the top 50 crytocurrencies
+  A React app for users to view the latest data for the top 50 crytocurrencies
 </p>
 
 <h2>Demo:</h2>
 <p>
-  View the app <a href="https://crypto-app-netlify.netlify.app"> here </a> 
+  View the app <a href="https://crypto-app-netlify.netlify.app"> here! </a> 
 </p>
 
 
@@ -20,4 +20,14 @@
     description lorem bla bla
   </li>
 </ul>
+
+<h2>Technical Details</h2>
+<h3>Tech Stack</h3>
+<ul>
+  <li>React</li>
+  <li>npm</li>
+</ul>
+
+
+
 
