@@ -1,3 +1,4 @@
+
 <h1>Crypto App </h1>
 <p>
   A React app for users to view the latest data for the top 50 crytocurrencies
@@ -8,6 +9,7 @@
   <a href="https://crypto-app-netlify.netlify.app"> View the app here! </a> 
 </p>
 
+<img src="https://user-images.githubusercontent.com/29510437/127043424-2a2b63c3-ab1d-4dff-9161-f0dea124b533.png">
 
 <h2>Features</h2>
 <ul>
@@ -57,7 +59,7 @@
   To avoid exposing the API key to the client, all interactions involving the API key are handled through the server.  Stolen API keys can be abused by an attacker to make the victim pay for their own data usage.
   </li>
   <li>
-  Cross-Origin Resource Sharing is implemented to allow the client to request data from the backend, and a whitelist is implemented to only allow specified domains to make valid requests. This is a good practice to prevent other users from making API calls in your name, which could be costing you money depending on the situation.
+  Cross-Origin Resource Sharing is implemented to allow the client to make API request from the backend, while using a whitelist to not allow other domains to make calls.
   </li>
   <li>
   The backend hides the API key from being directly exposed in the source code by using environment variables.
