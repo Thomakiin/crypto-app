@@ -5,7 +5,7 @@ var cors = require('cors');
 
 var corsOptions = {
     // only allow specified domains to request data
-    origin: ["https://crypto-app-netlify.netlify.app", process.env.NODE_ENV ? "" :"http://localhost:3000"], // Only allow local host if we're not in production
+    origin: ["https://crypto-app-netlify.netlify.app"], 
 
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
