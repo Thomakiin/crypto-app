@@ -4,7 +4,9 @@ const fetch = require('node-fetch');
 var cors = require('cors');
 
 var corsOptions = {
-    origin: ['http://localhost:3000', "https://crypto-app-netlify.netlify.app"],
+    // only allow specified domains to request data
+    origin: ["https://crypto-app-netlify.netlify.app",  process.env.PORT ? "" :"http://localhost:3000"], // Only allow local host if we're not in production
+
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
