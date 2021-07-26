@@ -78,7 +78,9 @@ const Coins = () => {
                     <div>
                         <div className="loader">
                         </div>
-                        <p style={{ "text-align": "center" }}>Fetching coin data from server . . . Heroku may be sleeping . . .</p>
+                        <p style={{ "text-align": "center" }}>
+                            Fetching data from server . . . This server is deployed with Heroku, please allow up to 30 seconds
+                        </p>
                     </div>
                 }
                 {coinsData.length > 0 && /* Display table of crypto currencies */
@@ -91,7 +93,7 @@ const Coins = () => {
                                 <th id="price" onClick={(e) => { sortCoins(e.target, "price", "number") }}>
                                     Price (USD)
                                 </th>
-                                <th id="marketCap" onClick={(e) => { sortCoins(e.target, "marketCap", "number") }}>
+                                <th id="marketCap" onClick={(e) => { sortCoins(e.target, "marketCap") }}>
                                     Market Cap
                                 </th>
                                 <th id="change" onClick={(e) => { sortCoins(e.target, "change") }}>
