@@ -38,13 +38,16 @@
 </ul>
 
 <p>
-  A list holds all of the cryptocurrency data in JSON format, and employs the use state hook. This list is mapped and displayed in the render function, therefore to sort or update the displayed data this list is updated.  
+  The focus of this app is the "coins" component where all of the cryptocurrency data is managed and displayed. 
 </p>
 <p>
-  The directional indicator is displayed on the desired element by adding a class called "ascending" or "descending". These classes use the :after selector to display a unicode arrow. The table heads (cryptocurrency, price, market cap) implement an on click function that sorts the data and adds the directional indicator class to themself.
+ Data is updated every minute using the set interval function
 </p>
 <p>
-  A function is used when updating the displayed data to make sure it stays sorted using the current sort configuration (EX: Sort by price descending)
+  A function is used when fetching and updating the data to make sure it stays sorted using the same configuration (EX: Sort by price descending)
+</p>
+<p>
+  The directional indicator is displayed on the desired element by adding a class called "ascending" or "descending". These classes use the :after selector to display a unicode arrow. 
 </p>
 <p>
   The % change is shown as red or green for each element depending on whether it was positive or negative change. 
@@ -72,7 +75,7 @@
 
 <h4>Objective</h4>
 <p>
-I created this application to practice my skills and learn new technologies. It will serve as a stepping stone for me to dive into more advanced applications.
+I created this application to practice my skills and learn new technologies.
 </p>
 <h4> Learning Outcomes: </h4>
 <ul>
