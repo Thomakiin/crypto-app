@@ -20,7 +20,7 @@
   </li>
   <li>
     <h4> The Latest Data </h4> 
-    The data is updated every minute using the latest data from <a href="https://rapidapi.com/Coinranking/api/coinranking1/"> Coinranking's API</a>
+    The data is updated every minute using the latest data from <a href="https://rapidapi.com/Coinranking/api/coinranking1/"> Coinranking's Rapid API page</a>
   </li>
   <li>
     <h4> Scalable Design </h4> 
