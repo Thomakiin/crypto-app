@@ -2,7 +2,7 @@
 
 <h1>Crypto App </h1>
 <p>
-  A React app for users to view the latest data for the top 50 crytocurrencies <a href="https://crypto-app-netlify.netlify.app"> View the app here! </a> 
+  A React app for users to view the latest data for the top 50 crytocurrencies. <a href="https://crypto-app-netlify.netlify.app"> View the app here! </a> 
 </p>
 
 <img src="https://user-images.githubusercontent.com/29510437/127046117-2ec764b8-f17d-4cd3-978f-1d5aab89b96f.png">
