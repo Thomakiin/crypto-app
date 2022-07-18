@@ -3,19 +3,23 @@ var router = express.Router();
 const fetch = require('node-fetch');
 var cors = require('cors');
 
+let isProduction = process.env.NODE_ENV === "production";
+let corsAllowedOrigins = ["https://crypto-app-netlify.netlify.app"];
+if(!isProduction)
+    corsAllowedOrigins.push("http://localhost:3000");
+
 var corsOptions = {
     // only allow specified domains to request data
-    origin: ["https://crypto-app-netlify.netlify.app"], 
-
+    origin: corsAllowedOrigins, 
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
 router.get('/', cors(corsOptions), (req, res) => {
-    fetch("https://coinranking1.p.rapidapi.com/coins", {
+    fetch("https://api.coinranking.com/v2/coins", {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": process.env.RAPID_API_KEY, // key is placed in Heroku environemnt variable to protect my Rapid API key
-            "x-rapidapi-host": "coinranking1.p.rapidapi.com"
+            'X-RapidAPI-Key': process.env.RAPID_API_KEY,
+            'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
         }
     })
         .then(response => {
