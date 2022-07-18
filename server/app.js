@@ -27,8 +27,8 @@ app.use('/api/coinranking', coinrankingRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-// listen on production port if available, otherwise run locally at 3001. 
-let listener = app.listen(process.env.PORT || 3001, 
+// listen on production port if available, otherwise run locally at 5000. 
+let listener = app.listen(process.env.PORT || 5000, 
 	() => console.log("Server is listening on port %d", listener.address().port));
 
 // catch 404 and forward to error handler
