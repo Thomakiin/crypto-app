@@ -43,9 +43,11 @@ const Coins = () => {
 
     }
 
-    // fetch latest crypto data from Coinranking using our backend proxy server (so the API key isn't exposed on the front end)
+    // fetch latest crypto data from Coinranking using our backend (so the API key isn't exposed on the front end)
     async function fetchCoinsData() {
-        const res = await fetch("https://crypto-app-heroku.herokuapp.com/api/Coinranking");
+        let isProduction = process.env.NODE_ENV === "production";
+        let fetchURL = isProduction ? "https://crypto-app-heroku.herokuapp.com/api/Coinranking" : "http://localhost:5000/api/coinranking";
+        const res = await fetch(fetchURL);
         const resJSON = await res.json();
         const data = await resJSON.data;
         return data;
@@ -87,16 +89,16 @@ const Coins = () => {
                     <table>
                         <thead>
                             <tr>
-                                <th id="name" onClick={(e) => { sortCoins(e.target, "name") }}>
+                                <th id="name" onClick={(e) => { sortCoins(e.target, "name", "string") }}>
                                     Cryptocurrency
                                 </th>
                                 <th id="price" onClick={(e) => { sortCoins(e.target, "price", "number") }}>
                                     Price (USD)
                                 </th>
-                                <th id="marketCap" onClick={(e) => { sortCoins(e.target, "marketCap") }}>
+                                <th id="marketCap" onClick={(e) => { sortCoins(e.target, "marketCap", "number") }}>
                                     Market Cap
                                 </th>
-                                <th id="change" onClick={(e) => { sortCoins(e.target, "change") }}>
+                                <th id="change" onClick={(e) => { sortCoins(e.target, "change", "number") }}>
                                     24H Change
                                 </th>
                             </tr>
